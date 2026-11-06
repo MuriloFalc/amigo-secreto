@@ -9,3 +9,5 @@ data/
 node_modules/
 *.log
 .DS_Store
+.vercel
+.env*
