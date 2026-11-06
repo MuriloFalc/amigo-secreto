@@ -274,7 +274,7 @@ O arquivo é gravado de forma atômica e com permissão `0600`. A pasta de dados
 
 ```text
 amigo-secreto/
-├── server.js            # servidor HTTP, APIs, autenticação e sorteio
+├── servidor.js          # servidor HTTP, APIs, autenticação e sorteio
 ├── api/
 │   └── index.js         # entrada da função serverless da Vercel
 ├── lib/
