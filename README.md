@@ -1,5 +1,8 @@
 # 🎁 Amigo Secreto
 
+**Site publicado:** https://amigo-secreto-falc.vercel.app
+**Painel do organizador:** https://amigo-secreto-falc.vercel.app/admin
+
 Aplicação completa de amigo secreto para compartilhar por link:
 
 - Qualquer pessoa com o link do site pode se cadastrar com **nome, endereço e até 3 presentes**.
@@ -155,7 +158,7 @@ Pronto: é só compartilhar o link do site com o grupo.
 ### O que já está configurado
 
 - `api/index.js` expõe o mesmo servidor Node como função serverless.
-- `vercel.json` manda as rotas para essa função e inclui a pasta `public/` no bundle.
+- `vercel.json` manda as rotas para essa função, inclui a pasta `public/` no bundle e fixa o preset **Other** (sem framework), evitando que a Vercel trate o projeto como um servidor Node de entrada única.
 - `lib/store.js` detecta o Upstash e troca o arquivo JSON por uma chave no Redis.
 - As escritas usam um bloqueio no Redis, então duas pessoas cadastrando ao mesmo tempo não perdem dados.
 - A sessão do organizador continua funcionando porque o segredo HMAC fica no próprio banco.
