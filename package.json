@@ -1,0 +1,18 @@
+{
+  "name": "amigo-secreto",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Amigo secreto com cadastro público, links pessoais e painel do organizador protegido por senha.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:env": "node --env-file=.env server.js",
+    "dev": "node --watch server.js",
+    "dev:env": "node --env-file=.env --watch server.js",
+    "check": "node --check server.js && node --check lib/store.js && node --check api/index.js && node --check public/comum.js && node --check public/app.js && node --check public/admin.js"
+  }
+}

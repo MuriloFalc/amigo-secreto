@@ -1,0 +1,11 @@
+# Dados locais (o banco fica em DATA_DIR/db.json)
+data/
+
+# Variáveis de ambiente com segredos
+.env
+.env.*
+
+# Dependências e artefatos
+node_modules/
+*.log
+.DS_Store

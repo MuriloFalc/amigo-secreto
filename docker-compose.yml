@@ -1,0 +1,14 @@
+services:
+  amigo-secreto:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      SENHA_ORGANIZADOR: "${SENHA_ORGANIZADOR:-12344321}"
+      MAX_PARTICIPANTES: "${MAX_PARTICIPANTES:-100}"
+    volumes:
+      - amigo-secreto-data:/data
+
+volumes:
+  amigo-secreto-data:

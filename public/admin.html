@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel do organizador · Amigo Secreto</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#fbf7f0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="pagina-admin">
+  <a class="pular" href="#conteudo-admin">Pular para o conteúdo</a>
+
+  <header class="admin-topo">
+    <a class="marca" href="./">
+      <span aria-hidden="true">🎁</span>
+      <span>Amigo Secreto</span>
+    </a>
+    <div class="admin-topo__acoes">
+      <a class="btn btn--fantasma btn--pequeno" href="./">Ver site</a>
+      <button class="btn btn--texto btn--pequeno" type="button" id="btn-sair-admin" hidden>
+        Sair
+      </button>
+    </div>
+  </header>
+
+  <main class="admin-pagina" id="conteudo-admin">
+    <!-- ===================== LOGIN ===================== -->
+    <section class="login" id="tela-login" hidden aria-labelledby="titulo-login">
+      <div class="login__card">
+        <div class="login__icone" aria-hidden="true">🔐</div>
+        <h1 id="titulo-login">Área do organizador</h1>
+        <p>Entre com a senha para gerenciar participantes e realizar o sorteio.</p>
+
+        <form id="form-login" novalidate autocomplete="off">
+          <label for="senha">Senha</label>
+          <input
+            id="senha"
+            name="senha"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Digite a senha do organizador"
+            aria-describedby="erro-login"
+            required
+          />
+          <p class="erro" id="erro-login" role="alert"></p>
+          <button class="btn btn--primario btn--grande" type="submit" id="btn-entrar">
+            Entrar
+          </button>
+        </form>
+
+        <p class="login__dica">
+          A senha é definida no servidor pela variável <code>SENHA_ORGANIZADOR</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== PAINEL ===================== -->
+    <section id="painel-admin" hidden aria-labelledby="titulo-admin">
+      <header class="admin-cabecalho">
+        <div>
+          <p class="admin-eyebrow">Painel do organizador</p>
+          <h1 id="titulo-admin">Amigo secreto</h1>
+          <p class="admin-status" id="admin-status"></p>
+        </div>
+        <div class="admin-cabecalho__acoes">
+          <button class="btn btn--fantasma btn--pequeno" type="button" id="btn-atualizar-admin">
+            Atualizar
+          </button>
+          <button class="btn btn--primario" type="button" id="btn-sortear">
+            Realizar sorteio
+          </button>
+        </div>
+      </header>
+
+      <div class="aviso aviso--atencao" id="aviso-senha-padrao" hidden>
+        <span class="aviso__icone" aria-hidden="true">⚠️</span>
+        <div>
+          <strong>Você está usando a senha padrão.</strong>
+          Troque a variável <code>SENHA_ORGANIZADOR</code> no servidor antes de
+          compartilhar o link do painel.
+        </div>
+      </div>
+
+      <div class="admin-grade">
+        <div class="admin-stat">
+          <span id="stat-total">0</span>
+          <small>participantes</small>
+        </div>
+        <div class="admin-stat">
+          <span id="stat-sorteio">—</span>
+          <small>sorteio</small>
+        </div>
+        <div class="admin-stat">
+          <span id="stat-links">0</span>
+          <small>links pessoais</small>
+        </div>
+      </div>
+
+      <div class="link-box link-box--admin">
+        <div>
+          <p class="link-box__titulo">Link para o grupo</p>
+          <p class="link-box__aviso">
+            Envie este endereço para as pessoas se cadastrarem. Cada uma recebe um
+            link pessoal no final.
+          </p>
+        </div>
+        <div class="link-box__linha">
+          <input id="link-site" type="text" readonly aria-label="Link do site para o grupo" />
+          <button class="btn btn--primario btn--pequeno" type="button" id="btn-copiar-site">
+            Copiar
+          </button>
+        </div>
+      </div>
+
+      <section class="admin-secao" aria-labelledby="titulo-participantes-admin">
+        <div class="admin-secao__topo">
+          <h2 id="titulo-participantes-admin">Participantes</h2>
+          <div class="admin-secao__acoes">
+            <button class="btn btn--fantasma btn--pequeno" type="button" id="btn-copiar-links">
+              Copiar links
+            </button>
+            <button class="btn btn--fantasma btn--pequeno" type="button" id="btn-baixar-txt">
+              Baixar .txt
+            </button>
+            <button
+              class="btn btn--fantasma btn--pequeno"
+              type="button"
+              id="btn-resetar-sorteio"
+              hidden
+            >
+              Apagar sorteio
+            </button>
+          </div>
+        </div>
+
+        <p class="admin-vazio" id="admin-vazio">
+          Ninguém se cadastrou ainda. Envie o link do site para o grupo.
+        </p>
+
+        <ul class="admin-lista" id="lista-admin"></ul>
+      </section>
+
+      <section class="admin-secao" id="secao-resultados" hidden aria-labelledby="titulo-resultados">
+        <div class="admin-secao__topo">
+          <h2 id="titulo-resultados">Resultado do sorteio</h2>
+          <button class="btn btn--fantasma btn--pequeno" type="button" id="btn-copiar-pares">
+            Copiar pares
+          </button>
+        </div>
+        <div class="tabela-pares" id="resultados-admin"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal__fundo" data-fechar></div>
+    <div
+      class="modal__caixa"
+      id="modal-caixa"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-titulo"
+    >
+      <button class="modal__fechar" type="button" data-fechar aria-label="Fechar">×</button>
+      <div id="modal-conteudo"></div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="comum.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

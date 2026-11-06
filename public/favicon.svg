@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Amigo secreto">
+  <rect width="64" height="64" rx="14" fill="#fbf7f0"/>
+  <path d="M14 29h36v22a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V29Z" fill="#b81f45"/>
+  <path d="M11 22h42v9H11z" fill="#931637"/>
+  <path d="M32 22v32" stroke="#fce8ec" stroke-width="5"/>
+  <path d="M32 23c-6 0-13-2-13-7 0-3 2-5 5-5 5 0 8 7 8 12Zm0 0c6 0 13-2 13-7 0-3-2-5-5-5-5 0-8 7-8 12Z" fill="#f7c948" stroke="#b8791f" stroke-width="2" stroke-linejoin="round"/>
+</svg>

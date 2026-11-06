@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amigo Secreto · Sorteio</title>
+  <meta
+    name="description"
+    content="Cadastre-se no amigo secreto com nome, endereço e até 3 presentes. O sorteio é feito pelo organizador e o resultado aparece só para você, no seu link pessoal."
+  />
+  <meta name="theme-color" content="#fbf7f0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="pular" href="#principal">Pular para o conteúdo</a>
+
+  <div class="pagina">
+    <header class="hero">
+      <span class="selo">
+        <span aria-hidden="true">🎁</span> Amigo secreto
+      </span>
+      <h1>Quem tira <em>quem?</em></h1>
+      <p class="hero__texto">
+        Cadastre seu nome, endereço e até três presentes. O sorteio é feito pelo
+        organizador e o resultado aparece só para você, no seu link pessoal.
+      </p>
+      <div class="hero__dicas">
+        <span>🔒 Link pessoal e secreto</span>
+        <span>🎲 Ninguém tira a si mesmo</span>
+        <span>🎁 Até 3 itens</span>
+      </div>
+    </header>
+
+    <main id="principal">
+      <!-- ===================== MINHA ÁREA ===================== -->
+      <section class="bloco" id="minha-area" hidden aria-labelledby="titulo-minha-area">
+        <div class="bloco__topo">
+          <span class="passo passo--estrela" aria-hidden="true">★</span>
+          <h2 id="titulo-minha-area">Sua participação</h2>
+          <button
+            class="btn btn--texto btn--pequeno bloco__acao"
+            type="button"
+            id="btn-sair-dispositivo"
+          >
+            Sair deste dispositivo
+          </button>
+        </div>
+
+        <div class="aviso aviso--sucesso" id="aviso-cadastro" hidden>
+          <span class="aviso__icone" aria-hidden="true">✓</span>
+          <div>
+            <strong>Cadastro concluído!</strong>
+            Guarde o link abaixo. Ele é a sua chave para ver o amigo secreto.
+          </div>
+        </div>
+
+        <div class="painel painel--minha">
+          <div class="minha-cabecalho">
+            <span class="avatar avatar--grande" id="meu-avatar" aria-hidden="true"></span>
+            <div class="minha-id">
+              <p class="minha-nome" id="meu-nome"></p>
+              <p class="minha-linha">
+                <span class="status-pill" id="meu-status" data-estado="pendente">
+                  Aguardando sorteio
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="link-box">
+            <div>
+              <p class="link-box__titulo">Seu link pessoal</p>
+              <p class="link-box__aviso">
+                Não compartilhe este link: é por ele que você vê o seu amigo secreto.
+              </p>
+            </div>
+            <div class="link-box__linha">
+              <input id="meu-link" type="text" readonly aria-label="Seu link pessoal" />
+              <button class="btn btn--primario btn--pequeno" type="button" id="btn-copiar-link">
+                Copiar
+              </button>
+            </div>
+          </div>
+
+          <div class="minha-acoes">
+            <button class="btn btn--primario" type="button" id="btn-revelar" hidden>
+              Revelar meu amigo secreto
+            </button>
+            <button class="btn btn--fantasma" type="button" id="btn-editar-meus-dados">
+              Editar meus dados
+            </button>
+          </div>
+
+          <p class="minha-espera" id="minha-espera" hidden></p>
+        </div>
+      </section>
+
+      <!-- ===================== CADASTRO ===================== -->
+      <section class="bloco" id="participar" aria-labelledby="titulo-participar">
+        <div class="bloco__topo">
+          <span class="passo" aria-hidden="true">1</span>
+          <h2 id="titulo-participar">Quero participar</h2>
+        </div>
+
+        <div class="aviso aviso--atencao" id="aviso-inscricoes" hidden></div>
+
+        <div class="painel painel--formulario" id="painel-cadastro">
+          <form id="form" novalidate autocomplete="off">
+            <div class="form-grade">
+              <div class="campo">
+                <label for="nome">Nome</label>
+                <input
+                  id="nome"
+                  name="nome"
+                  type="text"
+                  maxlength="60"
+                  placeholder="Ex.: Marina Souza"
+                  aria-describedby="erro-nome"
+                  required
+                />
+                <p class="erro" id="erro-nome" role="alert"></p>
+              </div>
+
+              <div class="campo">
+                <label for="endereco">Endereço de entrega</label>
+                <input
+                  id="endereco"
+                  name="endereco"
+                  type="text"
+                  maxlength="160"
+                  placeholder="Rua, número, bairro, cidade"
+                  aria-describedby="erro-endereco"
+                  required
+                />
+                <p class="erro" id="erro-endereco" role="alert"></p>
+              </div>
+            </div>
+
+            <div class="campo campo--itens">
+              <div class="campo__linha">
+                <label id="rotulo-itens" for="item-0">
+                  Lista de presentes <span class="dica">até 3 itens</span>
+                </label>
+                <button type="button" class="btn btn--fantasma btn--pequeno" id="btn-add-item">
+                  + item
+                </button>
+              </div>
+              <div id="itens" class="itens" role="group" aria-labelledby="rotulo-itens"></div>
+              <p class="ajuda">Opcional, mas ajuda muito quem vai te presentear. 🎁</p>
+            </div>
+
+            <div class="form-acoes">
+              <button class="btn btn--primario" type="submit" id="btn-salvar">
+                Quero participar
+              </button>
+              <button class="btn btn--texto" type="button" id="btn-cancelar-edicao" hidden>
+                Cancelar edição
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ===================== PARTICIPANTES ===================== -->
+      <section class="bloco" id="participantes" aria-labelledby="titulo-participantes">
+        <div class="bloco__topo">
+          <span class="passo" aria-hidden="true">2</span>
+          <h2 id="titulo-participantes">Quem já está na lista</h2>
+          <span class="contador" id="contador-lista">ninguém ainda</span>
+          <button class="btn btn--texto btn--pequeno bloco__acao" type="button" id="btn-atualizar">
+            Atualizar
+          </button>
+        </div>
+
+        <div class="painel painel--lista">
+          <p class="status-sorteio" id="status-sorteio"></p>
+          <ul class="lista-publica" id="lista" aria-label="Pessoas cadastradas"></ul>
+          <p class="lista-vazia" id="lista-vazia">
+            Ninguém se cadastrou ainda. Seja a primeira pessoa! 🎉
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== COMO FUNCIONA ===================== -->
+      <section class="bloco como-funciona" aria-labelledby="titulo-como-funciona">
+        <h2 class="como-funciona__titulo" id="titulo-como-funciona">Como funciona</h2>
+        <div class="passos">
+          <article class="passo-card">
+            <span class="passo-card__numero" aria-hidden="true">1</span>
+            <h3>Cadastre-se</h3>
+            <p>Informe seu nome, o endereço de entrega e até três presentes.</p>
+          </article>
+          <article class="passo-card">
+            <span class="passo-card__numero" aria-hidden="true">2</span>
+            <h3>Aguarde o sorteio</h3>
+            <p>O organizador faz o sorteio quando todo mundo já entrou na lista.</p>
+          </article>
+          <article class="passo-card">
+            <span class="passo-card__numero" aria-hidden="true">3</span>
+            <h3>Veja seu par</h3>
+            <p>Volte pelo seu link pessoal e descubra quem você vai presentear.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p>
+        Seus dados ficam guardados no servidor deste amigo secreto e não são
+        compartilhados com ninguém além do organizador e de quem tirar você.
+      </p>
+      <p class="rodape__links">
+        <a href="admin">Área do organizador</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- ===================== MODAL ===================== -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__fundo" data-fechar></div>
+    <div
+      class="modal__caixa"
+      id="modal-caixa"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-titulo"
+    >
+      <button class="modal__fechar" type="button" data-fechar aria-label="Fechar">×</button>
+      <div id="modal-conteudo"></div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="comum.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
